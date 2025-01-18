@@ -38,16 +38,8 @@
    pip install -r requirements.txt
    ```
 
-4. **初始化資料庫**
 
-   在 Python shell 中運行以下命令：
-
-   ```python
-   from app import init_db
-   init_db()
-   ```
-
-5. **運行應用**
+4. **運行應用**
 
    ```bash
    python app.py
