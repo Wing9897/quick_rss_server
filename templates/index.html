@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>速食RSS</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        input, textarea, button {
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        ul li img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+
+        .rss-link {
+            display: inline-block;
+            padding: 1rem;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>香港創科參考資訊分享</h1>
+    </header>
+    <main>
+        <form method="POST">
+            <input type="text" name="title" placeholder="輸入新的科研資訊標題" required>
+            <textarea name="content" placeholder="輸入內容" required></textarea>
+            <button type="submit">提交</button>
+        </form>
+        <h2>現有 RSS 項目</h2>
+        <ul>
+            {% for item in items %}
+                <li>
+                    <strong>{{ item.title }}</strong><br>
+                    <p>{{ item.content | safe }}</p>
+                    {% if item.image_url %}
+                        <img src="{{ item.image_url }}" alt="RSS 圖片">
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('rss_feed') }}" class="rss-link">查看 RSS Feed</a>
+    </main>
+</body>
+</html>
